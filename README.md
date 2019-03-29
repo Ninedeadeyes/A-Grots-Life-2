@@ -1,9 +1,7 @@
 # A-Grots-Life
 
-A Survival Game written in standard library where you play as a grot doing what a grot do. 
+A Survival Game written in standard library where you play as a grot doing what a grot do.  
 
-Will be making a simple version to learn OOP ( As there is only 3 modules this would be a good example of Object-oriented programming  ) 
+Simple (A) version is a good step to learning OOP whilst (B) version it is completely implemented.   
 
-Will also be making a advance version with graphics using pygame. 
-
-Both versions are work in progress. 
+Might still be making a version (C) with advance graphics. Work in progress. 
