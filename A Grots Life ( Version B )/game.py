@@ -1,43 +1,80 @@
 
 from goblin import Goblin
-
 import random
-
 import time 
 
 # A grots life. 
 
-
-
-
-              
-def main():
+            
+def main():    
     
-    gob_name = input("What is your name, you filthy Grot?: ")
+    print( "                A Grot's Life By T.K  ")
+    print("")
+    time.sleep(1)
+
+    print("You open your eyes and take your first breath ")
+    time.sleep(1)
+    print("You hear a voice in your head...")
+    time.sleep(1)
+    print("What is your name, you filthy Grot? ")
+    gob_name = input("Name:")
     print(gob_name,".. it suits you. Now, go do what grots do..")
-    time.sleep(2)
-    print( "KILL !!, EAT!!, SLEEP!! AND GET SHINIES !!  ")
-    time.sleep(2)
-    print("Also maybe get a roof over your head for those rainy days")
+    time.sleep(1)
+    print( "Kill, eat, sleep and get precious shinies !!  ")
+    time.sleep(1)
+    print("And maybe a place where your grubby face can call home")
     time.sleep(2)      
     gob = Goblin(gob_name,0,100,0,20)
-
+    print("""
+   .    .  .    .  .    .  .    .  .    .  .    .  .   .  .      
+     .      @%%@     .       .   . @%%@    X  .      . .  .  
+   .   . .  @.;8@t;::::;::;::::.:@S;::@  .X.X;   .       .  .
+     .     .tt%X :S%tXSStXStX%8S@tt8X::  X .;X.   . .  .     
+   .    .   . .;88S:;;8@8X@8XX::;8... . X.::; X.          .  
+      .   .   .   8:.         8:8.     X:::;;: X   .  . .    .
+   .    .         8:.         @.8:  . X::.:;::::X    .    .   
+     .     . . .  8:.         @.8.         :@    .    .   .  
+   .   .  .      .8.:         S.8..    ..; :@      .    .   .
+     .       .  . 8::         @.8:      .: :@ . .    .    .  
+   .    .  .. :.tt8.::::::::::::Xt%t...  ..;@     .    .     
+      .   ::.;X:.::t%%%%%%t%tS;tt:::X;X: . :@.  .   .    .  .
+   .    . S;;@@::8t:;:;:;:;:;t:;8::t8S:t  .:@     .   .      
+     .  ;X8S@8;8.8: .    .      8;;. ;X;t .;@. .    .   . .  
+   .  S XS8%  ;@.8.   .    . .  8;:    @ 8:;@    .          .
+      :. S    :@.8.     .       8;..   . 8:;@ .    .  . .    
+   .  X;;@  . ;@.8: . .   .  .  8;: .     .;@   .    .    .  
+    .         ;@.:SXXXXXXXXXXXXX@:.   .   .:@ .   .     .   .
+        . . . ;X..::........::.......     .;@   .   .  .     
+ .   .         XXS:::@X@@XXS.;8X@X@S  .  . ;8     .      . . 
+      .  .  .   .8;:..   . .;%   .  .   . .;@ .      .       
+   .    .     .  8;.      ..t%        .  ..;@   .  .   .  .  
+   .      . %S@X@8;: . .  . X ; 8XS;     . :@ .  .   .   .  .
+ .    .   8888888S    ...  8888888S%     . :8      .   .     
+       . .     .     .        .  .   . .     .  .        .  
+  . .       .     .   .       .   .              
+  
+  """)
     endgame= False
     choice = None  
     while choice != "0":
+        #os.system("cls")   
+       
+        
         print("")
         print (  "  So... "  ,gob_name, " What is your action ?" )
         print \
         ("""
     
         0 - Quit
-        1 - status
+        1 - Status
         2 - Eat
         3 - Scavenge 
         4 - Explore
         5 - Rest
         6 - Craft 
         """)
+
+       
     
         choice = input("Choice: ")
         print()
@@ -53,13 +90,14 @@ def main():
 
         elif choice == "2":
             gob.eat()
+            
 
         elif choice == "3":
             gob.farm()
 
         elif choice == "4":
             gob.hunt()
-
+          
         elif choice == "5":
             gob.rest()
 
@@ -71,12 +109,12 @@ def main():
             print("\nSorry, but", choice, "isn't a valid choice.")
 
         if gob.hunger >20:
-            print("died from hunger")
+            print("You have gone too many days without food. You have died from hunger")
             input("press any button to continue")
             break
 
         if gob.health <=0:
-            print("died from wounds")
+            print("You have suffered too many wounds, you have bled to death")
             input("press any button to continue")
             break
 
@@ -98,10 +136,10 @@ def main():
                 pass
  
         else:
-            pass 
-
-
-
+            pass
+        
 
 main()
+
+
 ("\n\nPress the enter key to exit.") 
