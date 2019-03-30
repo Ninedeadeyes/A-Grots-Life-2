@@ -2,7 +2,7 @@ from info import List
 import random
 
 
-info=List()
+info_crit=List()
 
 class Goblin(object):
    
@@ -75,7 +75,7 @@ class Goblin(object):
             mep=random.choice(self.larder)
             print("You eat some",mep)
             self.larder.remove(mep)
-            print("It was a tasty treat")
+            print("It was a tasty meal")
             self.hunger -= eat
             self.provision-=2
                    
@@ -88,9 +88,8 @@ class Goblin(object):
       
         
     def hunt(self):
-        #info=List()
-        loot=random.choice(info.lootlist)
-        enemy=random.choice(info.enemylist)
+        loot=random.choice(info_crit.lootlist)
+        enemy=random.choice(info_crit.enemylist)
         if ("Fish Bone Spear") in self.goal:
             print("Armed with his Fish Bone Spear...")
             damage=random.randint(1,10)
@@ -100,29 +99,30 @@ class Goblin(object):
             damage=random.randint(11,30)
             self.health-=damage
             
-        print ("You come across a",enemy)
-        print("After an epic fight you took ",damage,"damage")         
+        print("You come across a",enemy)
+        print("After an epic fight, you defeat the",enemy)
+        print("you took",damage,"damage")         
 
         if loot in self.inventory:
             print("You see nothing of interest")
             
         else:
             self.inventory.append(loot)
-            print("But you have found",loot)
+            print("You find a",loot)
 
         coin=random.randint(1,5)
         self.gold+=coin
-        print("You have gain",coin,"gold")
+        print("You gain",coin,"gold")
         
         self.__pass_time()
         
 
 
     def farm(self,stash=2):
-        grub=random.choice(info.foodlist)
-        print("You have found some",grub)
+        grub=random.choice(info_crit.foodlist)
+        print("You find some",grub)
         self.larder.append(grub)
-        print("You have gain",stash,"provisions")
+        print("You gain",stash,"provisions")
         self.provision+= stash
     
         self.__pass_time()
@@ -174,25 +174,25 @@ class Goblin(object):
 
         if choice == "0":
             print("come back when you have more resource")
-
+          
         elif choice=="1":
             if ("Fish Bone Spear") in self.goal:
                 print("You only need one")
 
-            elif "Fish Bone" and "Old Stick" in self.inventory:
+            elif "Fish Bone" and "Wood Stick" in self.inventory:
                 self.inventory.remove("Fish Bone")
-                self.inventory.remove("Old Stick")
+                self.inventory.remove("Wood Stick")
                 self.goal.append("Fish Bone Spear")
                 print("You have crafted the Fish Bone Spear")
-                
+               
             else:
                 print("You do not have the crafting material")
-
+               
         elif choice=="2":
 
             if ("Straw Bed") in self.goal:
                 print("You only need one")
-
+                
             elif "Fist Full of Straws" and "Dirty Potato Sack" in self.inventory:
                 self.inventory.remove("Fist Full of Straws")
                 self.inventory.remove("Dirty Potato Sack")
@@ -207,8 +207,8 @@ class Goblin(object):
             if ("Small Hut") in self.goal:
                 print("You only need one")
 
-            elif "Crumbling Stones" and "Rusty Umbrella" and "Rope" in self.inventory:
-                self.inventory.remove("Crumbling Stones")
+            elif "Giant Boot" and "Rusty Umbrella" and "Rope" in self.inventory:
+                self.inventory.remove("Giant Boot")
                 self.inventory.remove("Rusty Umbrella")
                 self.inventory.remove("Rope")
                 self.goal.append("Small Hut")    
