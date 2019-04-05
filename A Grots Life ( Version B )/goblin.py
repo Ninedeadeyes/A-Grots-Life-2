@@ -57,8 +57,11 @@ class Goblin(object):
 
     
     def status(self):
+        print("Inventory")
+        for x in range(len(self.inventory)):
+            print (self.inventory[x],)
         print("You have",self.provision,"provisions")
-        print("You have",self.inventory,"in your bag" )
+        #print("You have",self.inventory,"in your bag" )
         print("You have",self.gold, "gold")
         print("You are ",self.hung)
         print("You are ",self.wounded)
@@ -87,11 +90,11 @@ class Goblin(object):
         self.__pass_time()
       
         
-    def hunt(self):
+    def explore(self):
         loot=random.choice(info_crit.lootlist)
         enemy=random.choice(info_crit.enemylist)
         if ("Fish Bone Spear") in self.goal:
-            print("Armed with his Fish Bone Spear...")
+            print("Armed with your Fish Bone Spear...")
             damage=random.randint(1,10)
             self.health-=damage
             
@@ -193,7 +196,7 @@ class Goblin(object):
             if ("Straw Bed") in self.goal:
                 print("You only need one")
                 
-            elif "Fist Full of Straws" and "Dirty Potato Sack" in self.inventory:
+            elif ("Fist Full of Straws") and ("Dirty Potato Sack") in self.inventory:
                 self.inventory.remove("Fist Full of Straws")
                 self.inventory.remove("Dirty Potato Sack")
                 self.goal.append("Straw Bed")    
@@ -207,10 +210,9 @@ class Goblin(object):
             if ("Small Hut") in self.goal:
                 print("You only need one")
 
-            elif "Giant Boot" and "Rusty Umbrella" and "Rope" in self.inventory:
+            elif ("Giant Boot") and ("Rusty Umbrella") in self.inventory:
                 self.inventory.remove("Giant Boot")
                 self.inventory.remove("Rusty Umbrella")
-                self.inventory.remove("Rope")
                 self.goal.append("Small Hut")    
                 print("You have crafted Small Hut")
 

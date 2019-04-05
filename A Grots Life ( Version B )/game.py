@@ -1,7 +1,9 @@
-
+import turtle
 from goblin import Goblin
 import random
 import time 
+
+
 
 # A grots life. 
 
@@ -14,7 +16,7 @@ def main():
 
     print("You open your eyes and take your first breath ")
     time.sleep(1)
-    print("You hear a voice in your head...")
+    print("You hear a voice in the darkness...")
     time.sleep(1)
     print("What is your name, you filthy Grot? ")
     gob_name = input("Name:")
@@ -28,7 +30,7 @@ def main():
     print("""
    .    .  .    .  .    .  .    .  .    .  .    .  .   .  .      
      .      @%%@     .       .   . @%%@    X  .      . .  .  
-   .   . .  @.;8@t;::::;::;::::.:@S;::@  .X.X;   .       .  .
+   .   . .  @::8@t;::::;::;::::.:@S;::@  .X.X;   .       .  .
      .     .tt%X :S%tXSStXStX%8S@tt8X::  X .;X.   . .  .     
    .    .   . .;88S:;;8@8X@8XX::;8... . X.::; X.          .  
       .   .   .   8:.         8:8.     X:::;;: X   .  . .    .
@@ -40,16 +42,16 @@ def main():
       .   ::.;X:.::t%%%%%%t%tS;tt:::X;X: . :@.  .   .    .  .
    .    . S;;@@::8t:;:;:;:;:;t:;8::t8S:t  .:@     .   .      
      .  ;X8S@8;8.8: .    .      8;;. ;X;t .;@. .    .   . .  
-   .  S XS8%  ;@.8.   .    . .  8;:    @ 8:;@    .          .
-      :. S    :@.8.     .       8;..   . 8:;@ .    .  . .    
+   .   XXS8%  ;@.8.   .    . .  8;:    @ 8:;@    .          .
+      :XXS    :@.8.     .       8;..   . 8:;@ .    .  . .    
    .  X;;@  . ;@.8: . .   .  .  8;: .     .;@   .    .    .  
     .         ;@.:SXXXXXXXXXXXXX@:.   .   .:@ .   .     .   .
         . . . ;X..::........::.......     .;@   .   .  .     
  .   .         XXS:::@X@@XXS.;8X@X@S  .  . ;8     .      . . 
       .  .  .   .8;:..   . .;%   .  .   . .;@ .      .       
    .    .     .  8;.      ..t%        .  ..;@   .  .   .  .  
-   .      . %S@X@8;: . .  . X ; 8XS;     . :@ .  .   .   .  .
- .    .   8888888S    ...  8888888S%     . :8      .   .     
+   .      SS%S@X@8;: . .  . X ; 8XSS     . :@ .  .   .   .  .
+ .    .   8888888S    ...  888888888     . :@      .   .     
        . .     .     .        .  .   . .     .  .        .  
   . .       .     .   .       .   .              
   
@@ -96,7 +98,7 @@ def main():
             gob.farm()
 
         elif choice == "4":
-            gob.hunt()
+            gob.explore()
           
         elif choice == "5":
             gob.rest()
