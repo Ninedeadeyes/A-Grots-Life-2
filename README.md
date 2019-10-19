@@ -6,4 +6,4 @@ Simple (A) version is a good step to learning OOP (object oriented programming) 
 
 Version B is a good easy example of OOP programming since you are only using 3 files.  
 
-Might still be making a version (C) with advance graphics. Work in progress. 
+Version C is an Tkinter version of the game. I am planning to improve on this in the future.  
