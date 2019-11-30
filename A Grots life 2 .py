@@ -8,9 +8,9 @@ import time
 
 root=Tk()
 
-root.title("A Grot's life")
+root.title("A Grot's life 2")
 
-root.geometry("400x400+900+400")
+root.geometry("400x400+900+200")
 
 
 
@@ -21,35 +21,52 @@ area_list=(" Woods of the Topsy Turvy King", "Forest of the Humourless Harlequin
 area_list1=("Heart of Darkness" ,"Doomville", "Red Jester's Torture Chamber","Temple of Apshai","Dungeons of Doom","Grot Fortress of Snikrik,","Hidden Hideout of Nine Dead Eyes",
             "Mountains of the Wild Berserker","Stronghold of Daggerfall","Walking Hills of Cthulhu","Forlorn Islands of Lost Souls"," Mysterious Swampland of Kuluth")
 
-action_list=("an epic fight,","a violent revelation,","a grueling misadventure with your new comrade,","a surprise attack,","a one sided wrestling match,","a bone breaking dance showdown,",
-             "a deadly game of tag,","an unfortunate stabbing incident,","a thumb war to the death,","a game of hide and seek that went horribly wrong,","a pathetic slap fight, ","taking one too many arrows to the knee,"
-             ,"A legendary fight that even your grandchildren will still be talking about,","A heated argument that ended in a tragic death","a narrow escape from impending doom","an dishonourable duel")
-             
+action_list=("an epic fight,","a violent revelation,","a grueling misadventure with your new comrade,","a sneaky attack from behind,","a one sided wrestling match,","a bone breaking dance showdown,",
+             "a deadly game of tag,","an unfortunate stabbing incident,","a thumb war to the death,","a game of hide and seek that went horribly wrong,","a pathetic slap fight, ","taking an arrow to the knee,"
+             ,"a heated argument that ended in a tragic death","an dishonourable duel")
+
+
+action_list1=("an epic fight,","a violent struggle,","a bloody fight,","a magnificant duel,","a vicious battle,","a battle to the death,","a legendary fight that even your grandchildren will still be talking about,",
+              "a surprise attack,","a narrow escape from being critically wounded,")
+
+action_list2=("a narrow escape from impending doom,","barely surviving from the cosmic encounter,","a nightmareish struggle that left your mind consumed with terror,")
+        
 loot_list=["a fist full of straws","a fish bone","an old stick","a dirty potato sack","a rope"]
 
 loot_list1=["some mechanical bits","a greater demon horn","a beholder eye","some crumbling stones","a giant shoe","a rusty umbrella",]
+
+trader_list=["some mechanical bits","a greater demon horn","a beholder eye","a few pages of the Necronomicon"]
 
 loot_list2=["the statue of Mog","the statue of Gog","the statue of Krog"]
 
 food_taste=["tasty","salty","disgusting","vile","smelly","delicious","foul"]
 
-description_list=("a stupid","a heart broken","a deranged","a morbid","a tiny","a suicidal","a sexy","a skinny","a racist","a peaceful","a silly","a drunk","a sadistic","a young", "a shy","a talkative", "a nihilistic",
-                     "a dyslexic", "a lovestruck","a sarcastic","a homophobic","a forelorn","a happy","a friendly","a psychopathic","an optimistic","a mysterious","a beautiful","a malnourish","a zealous","a hot-headed")
+description_list=("a stupid","a heart broken","a deranged","a morbid","a tiny","a suicidal","a sexy","a skinny","a peaceful","a silly","a drunk","a sadistic","a young", "a shy","a talkative", "a nihilistic","a hungry",
+                     "a dyslexic", "a lovestruck","a sarcastic","a forelorn","a happy","a friendly","a psychopathic","an optimistic","a mysterious","a beautiful","a malnourished","a zealous","a hot-headed","a mad","a drunk")
+
+
+description_list1=("a stupid","a heart broken","a deranged","a morbid","a giant","a suicidal","a skinny","a racist","a drunk","a sadistic","a nihilistic","a tiny","a murderous","a evil","a heartless",
+                    "a sarcastic","a homophobic","a forelorn","a psychopathic","a mysterious","a beautiful","a malnourish","a zealous","a hot-headed","hateful","a mad","a violent")
+
+rumour=("'You need the power of a tank to face the Womb of Chaos'","'You can fully recover your health by hiring a room which also comes with a nice wormy dinner.'","'Craft items to make life easier for yourself.'","'Need more gold? Craft the Purse Snatcher.'",
+        "'You can only find certain crafting material from specific areas,'","A long time ago,a grot became so popular that they were crowned the Grot King.'","'The Shadowland is much more dangerous than The land of Mad Jack'",
+        "'You find yourself doing very silly things in the land of Mad Jack'")
 
 enemy_list2= ("dragon","demon","blob","zombie","vampire","beholder","troll","chaos giant","ettin","mimic","red jester",
             "succubus","bone devil","clay golem","drow","gnoll","swamp hag"," night grot","half-ogre","hobgrot","bog imp","owlbear","winter wolf","chaos harlequin","abomination")
 
 
-enemy_list1= ("hobbit","pony ","farmer","kobold","gnome","jester","harlequin","elf","druid","hill giant","grot","dwarf","wererat","cowman","imp","fairy","bandit","bard","priest","ranger","thief","knight","trader","orc")
 
-enemy_list3= ("a Dracolich","an Elder Brain","a Leshay","an Atropal","a Tarrasque","a Doom Lord","a Baphomet")
+enemy_list1= ("hobbit","pony ","farmer","kobold","gnome","jester","harlequin","elf","druid","hill giant","grot","dwarf","werefish","cowman","imp","fairy","bandit","bard","hermit","ranger","thief","knight","rogue","orc","dragonkin")
+
+enemy_list3= ("Azathoth","Shub-Niggurath","Cthulhu","The King in Yellow","Yog-Sothoth","Nug and Yeb")
 
 inventory=[]
 food=("psychedelic mushrooms","meaty bones","rotten apples","spoiled meat","mouldy bread","dead rats","foul smelling eggs","nutritious cow poo","jaw breaking nuts","black algae","plump worms","spicy fireflys")
 larder=[]
-goal=[]
+goal=[""]
 
-         
+ 
 
 
 class Goblin(object):
@@ -63,17 +80,23 @@ class Goblin(object):
         self.gold=gold
         self.reputation=reputation
         self.ranking= "Grot Cannon Fodder "
-
+        self.end=False
+        self.quest=1
+        self.reward=0
+        self.item=""
+        self.doomday=15
 
 
 
     def __pass_time(self):
-        self.hunger -= 2
+        self.hunger -= 4
         self.stats()
         self.fight_death()
         self.hunger_death()
         self.rep()
         self.rank()
+        self.health_warning()
+        
 
         
 
@@ -89,16 +112,16 @@ class Goblin(object):
         message=str(self.name)
         message+=(" ??? What a stupid name !! ")
         message+=("It suits you")
-        message+=(". Now do what grots do... Kill, eat sleep till your heart explode")
+        message+=(". Now do what grots do... Kill, eat sleep till your heart explodes")
         message+=(" and maybe find a place where your grubby face can call home.                                 ------------------------------")
-        message+=("If you think you are 'ard enough...")
+        message+=("If you think you are hard enough...")
         message+=("Someone stole the statues of our gods Mog,Gog and Krog. ")
         message+=("Old Man Blabgut saw them escaping towards the Womb of Chaos. ")
         message+=("Bring them back and you shall be rewarded ")
 
 
         lb_tasks.insert(0.0, message)
-       
+        self.rep()   # can also be gob.rep() really depends if you want it specific for an 'object' 
 
         
 
@@ -165,7 +188,7 @@ class Goblin(object):
             larder.append(grub)
             larder.append(grub)
             message="Using your Grub Net,"
-            message+=" you scavenge alot of "
+            message+=" you scavenge a bunch of "
             message+=str(grub)
             message+=". You gain "
             message+=str(4)
@@ -191,18 +214,23 @@ class Goblin(object):
             self.__pass_time()
 
 
-    def eat(self, eat = 5,stew=10):
-        grotPic.config(image = normalphoto)
+    def eat(self, eat = 12,stew=24):
+        
      
-        if self.hunger >90:
+        if self.hunger >=104:
+            grotPic.config(image = normalphoto)
             message="You are not hungry"
             lb_tasks.delete(0.0, END)
             lb_tasks.insert(0.0, message)
 
-        elif self.provision>0 and ("Stone Pot") in goal :            
+        elif self.provision>0 and ("Stone Pot") in goal :
+            grotPic.config(image = eatphoto)
             mep=random.choice(larder)
             larder.remove(mep)
             self.hunger += stew
+            if self.hunger>104:
+                self.hunger=104
+
             self.provision-=2
 
             message= "You make some comforting stew with your "          
@@ -214,11 +242,16 @@ class Goblin(object):
             lb_tasks.delete(0.0, END)
             lb_tasks.insert(0.0, message)
 
-        elif self.provision>0:            
+        elif self.provision>0:
+            grotPic.config(image = eatphoto)
             mep=random.choice(larder)
             tas=random.choice(food_taste)
             larder.remove(mep)
             self.hunger += eat
+
+            if self.hunger>104:
+                self.hunger=104
+
             self.provision-=2
            
             message="You eat some "
@@ -232,6 +265,7 @@ class Goblin(object):
                    
       
         else:
+            grotPic.config(image = normalphoto)
             message=("You do not have any food")
             lb_tasks.delete(0.0, END)
             lb_tasks.insert(0.0, message)
@@ -243,15 +277,15 @@ class Goblin(object):
         global window
         window=Tk()
         window.title("Explore")
-        window.geometry("160x80+840+500")
+        window.geometry("120x100+840+300")
 
         btn_add_task=Button(window,text="  Land of Mad Jack  ",fg="black",bg="white",command=gob.explore)
         btn_add_task.grid(row=1,column=0)
 
-        btn_add_task=Button(window,text="   Shadow land   ",fg="black",bg="white",command=gob.explore1)
+        btn_add_task=Button(window,text="      Shadow land      ",fg="black",bg="white",command=gob.explore1)
         btn_add_task.grid(row=2,column=0)
 
-        btn_add_task=Button(window,text="Womb of Chaos",fg="black",bg="white",command=gob.explore2)
+        btn_add_task=Button(window,text="   Womb of Chaos   ",fg="black",bg="white",command=gob.explore2)
         btn_add_task.grid(row=3,column=0)
 
         
@@ -280,7 +314,7 @@ class Goblin(object):
            
             
         else:
-            message1=("Armed with a desire for adventure...")
+            message1=("With a desire for adventure...")
             damage=random.randint(10,30)
             self.health-=damage
             lb_tasks.delete(0.0, END)
@@ -310,7 +344,7 @@ class Goblin(object):
             message3="You find "
             message3+=str(loot)
             
-        if ("Purse Snatcher") in goal :
+        if ("Purse Snatcher") in goal : 
             coin=random.randint(10,20)
             self.gold+=(coin)
             message4= ". With your Purse Snatcher,"
@@ -323,7 +357,7 @@ class Goblin(object):
             
             coin=random.randint(1,3)
             self.gold+=coin
-            message4=". You manage to steal "
+            message4=". You gain "
             message4+=str(coin)
             message4+=" gold"
 
@@ -339,9 +373,9 @@ class Goblin(object):
     def explore1(self):
         window.destroy()
         adventure=random.choice(area_list1)
-        description=random.choice(description_list)
+        description=random.choice(description_list1)
         loot=random.choice(loot_list1)
-        action=random.choice(action_list)
+        action=random.choice(action_list1)
         enemy=random.choice(enemy_list2)
         
         if ("Fish Bone Spear") in goal and not ("Grotonaut")in goal:
@@ -357,7 +391,7 @@ class Goblin(object):
             self.health-=damage
             
         else:
-            message1=("Armed with a lust for danger...")
+            message1=("With a lust for danger...")
             damage=random.randint(50,90)
             self.health-=damage
             lb_tasks.delete(0.0, END)
@@ -388,7 +422,7 @@ class Goblin(object):
             message3+=str(loot)
 
         if ("Purse Snatcher") in goal :
-            coin=random.randint(50,80)
+            coin=random.randint(35,65)
             self.gold+=(coin)
             message4= ". With your Purse Snatcher,"
             message4+=" no purse is safe"
@@ -398,9 +432,9 @@ class Goblin(object):
 
         else:
             
-            coin=random.randint(30,50)
+            coin=random.randint(20,40)
             self.gold+=coin
-            message4=". You manage to steal "
+            message4=". You gain "
             message4+=str(coin)
             message4+=" gold"
             
@@ -417,9 +451,13 @@ class Goblin(object):
 
     def explore2(self):
         window.destroy()
-        loot=random.choice(loot_list2)
-        action=random.choice(action_list)
+        loot =("a few pages of the Necronomicon")
         enemy=random.choice(enemy_list3)
+        action=random.choice(action_list2)
+        if self.end==False:
+            loot=random.choice(loot_list2)
+            
+
         
         if ("Fish Bone Spear") in goal and not ("Grotonaut")in goal:
             message1=(" Armed with your Fish Bone Spear... ")
@@ -434,7 +472,7 @@ class Goblin(object):
             self.health-=damage
             
         else:
-            message1=("Armed with an optimistic outlook...")
+            message1=("With an optimistic outlook...")
             damage=random.randint(200,999)
             self.health-=damage
             lb_tasks.delete(0.0, END)
@@ -442,12 +480,12 @@ class Goblin(object):
         
          
         message2="You explore the "
-        message2+=" The Womb of Chaos "
-        message2+=". You come across "
+        message2+=" The Womb of Chaos"
+        message2+=". You come across"
         message2+=" "
         message2+=str(enemy)
         message2+=". After "
-        message2+="an epic fight,"
+        message2+=str(action)
         message2+=" you took "
         message2+=str(damage)
         message2+=" damage. "
@@ -456,17 +494,15 @@ class Goblin(object):
         if loot in inventory:
             message3= "You see nothing of interest"
             
-
-            
         else:
             inventory.append(loot)
             message3="You find "
             message3+=str(loot)
             gob.end_game1()
             
-        coin=random.randint(50,100)
+        coin=random.randint(60,120)
         self.gold+=coin
-        message4=". You manage to find "
+        message4=". You gain "
         message4+=str(coin)
         message4+=" gold"
 
@@ -494,7 +530,7 @@ class Goblin(object):
                 message=("You rest better in your Straw Bed.")
                 lb_tasks.delete(0.0, END)
                 
-                sleep=random.randint(10,30)
+                sleep=random.randint(20,40)
                 
 
             else:
@@ -511,7 +547,7 @@ class Goblin(object):
                 self.health=100
 
             recover= self.health-bob   
-            message1=" You have recovered "
+            message1=" You recover "
             message1+=str(recover)
             message1+=" health"
             lb_tasks.insert(0.0, message1)
@@ -775,38 +811,188 @@ class Goblin(object):
         
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
-        
-    def pub(self):
+
+
+
+    def third_win(self):
         grotPic.config(image = pubphoto)
-        if self.gold >=1 and self.gold <10:
-            message="You drink by yourself, alone so alone "
+        global window
+        window=Tk()
+        window.title("Inn")
+        window.geometry("150x80+840+350")
+
+        btn_add_task=Button(window,text="  Drink 1g    ",fg="black",bg="white",command=gob.drink)
+        btn_add_task.grid(row=1,column=0)
+
+        btn_add_task=Button(window,text="  Round 10g  ",fg="black",bg="white",command=gob.round)
+        btn_add_task.grid(row=1,column=1)
+ 
+        btn_add_task=Button(window,text="  Room 75g ",fg="black",bg="white",command=gob.room)
+        btn_add_task.grid(row=2,column=0)
+
+        btn_add_task=Button(window,text="  Feast 100g ",fg="black",bg="white",command=gob.feast)
+        btn_add_task.grid(row=2,column=1)
+
+        btn_add_task=Button(window,text=" Mysterious Trader ",fg="black",bg="white",command=gob.trader)
+        btn_add_task.grid(row=3,column=0,columnspan=2)
+        
+
+
+
+    def doom_day(self):
+
+        if self.doomday==10:
+            messagebox.showinfo("???","You are making some easy money from this shadowy figure")
+            messagebox.showinfo("???","Is there more than meet the eyes ? ")
+
+
+        
+        if self.doomday==5:
+            messagebox.showinfo("???","You have a strong feeling in your stomach")
+            messagebox.showinfo("???","if you keep working with this trader he will bring your doom")
+            
+
+        
+        if self.doomday==0:
+            messagebox.showinfo("RIP","As you leave the Inn, you hear the mysterious trader chanting")
+            messagebox.showinfo("RIP","You turn around but a blinding light consume the room")
+            messagebox.showinfo("RIP","You wake up in rubbles with your whole village destroyed")
+            messagebox.showinfo("RIP","You watch a green mountain walk into the distance")
+            quit()
+            quit()
+
+        else:
+            pass
+            
+            
+        
+         
+
+
+    def trader(self):
+
+        window.destroy()
+        if self.quest==1:
+        
+            #global quest  ( can be used instead of 'self.quest) 
+            self.item=random.choice(trader_list)
+            #global reward
+            self.reward=random.randint(500,1000)
+            self.quest=2
+            message="If you find "
+            message+=str(self.item)
+            message+=". I will offer you "
+            message+=str(self.reward)
+            message+=" gold."
+
+
+        else:
+            if self.item in inventory:
+                message="Well done, "
+                message+="you have acquired the requested item for me."
+                message+=" Here is your "
+                message+=str(self.reward)
+                message+=" gold."
+                self.quest=1
+                inventory.remove(self.item)
+                self.gold+=(self.reward)
+                self.doomday-=1
+                self.doom_day()
+        
+
+                    
+
+            else:
+                message="Please come back when you have found "
+                message+=str(self.item)
+                message+="."
+                
+
+        lb_tasks.delete(0.0, END)
+        lb_tasks.insert(0.0, message)        
+                
+
+
+
+    def drink(self):
+        rumour1=random.choice(rumour)
+        window.destroy()
+        if self.gold>=1:
+            message="You drink by yourself alone, so alone but you do hear a rumour. "
+            message+=str(rumour1)
             self.gold-=1
             self.hunger+=2
 
-        elif self.gold >=10 and self.gold <50:
-            message="A round on you !! Your grot mates cheer you on"
-            self.gold-=10
-            self.hunger+=2
-            self.reputation+=1
-            
-        elif self.gold >=50:
-            message=" All food and drinks on your tab !! The grots cheers your name "
-            message+= str(self.name)
-            message+="."
-            
-            self.gold-=50
-            self.hunger=100
-            self.reputation+=6
-
-        
-            
-
         else:
-            message="bog off, you can't even afford one drink"
+            message="Bog off, you don't have enough gold"
 
+         
+        self.__pass_time()
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
+
+
+    def round(self):
+        
+        window.destroy()
+        
+        if self.gold>=10:
+            message="A round on you !! Your grot mates cheer you on. "
+            message+="After retelling some of your misadventures, "
+            message+="your grots mate respects you more."
+            self.reputation+=2
+            self.gold-=10
+            self.hunger+=2
+
+        else:
+            message="Bog off, you are too poor ! "
+
         self.__pass_time()
+        lb_tasks.delete(0.0, END)
+        lb_tasks.insert(0.0, message)
+
+    def feast(self):
+        
+        window.destroy()
+        if self.gold>=100:
+            message="All food and drinks on your tab !!"
+            message+=" Everyone leaves with a fully belly, "
+            message+="and greater admiration for you, thank you "
+            message+=str(self.name)
+            message+=". "
+            self.reputation+=12
+            self.gold-=100
+            self.hunger=102
+
+        else:
+            message="Bog off, someone has a to pay for the food "
+
+        self.__pass_time()
+        lb_tasks.delete(0.0, END)
+        lb_tasks.insert(0.0, message)
+
+
+    def room(self):
+        
+        window.destroy()       
+        if self.gold>=75:
+            message="A soft cosy bed and a hot wormy dinner for your belly. "
+            message+="What more can a grot ask for ?"
+            self.gold-=100
+            self.hunger=104
+            self.health=100
+
+        else:
+            message="Bog off, no gold, no room ! "
+    
+        self.__pass_time()
+        lb_tasks.delete(0.0, END)
+        lb_tasks.insert(0.0, message)
+
+            
+        
+
+    
         
             
 
@@ -818,33 +1004,46 @@ class Goblin(object):
 
             
         if ("Fish Bone Spear") in goal and ("Straw Bed")in goal and("Shoe Hut") in goal and ("Stone Pot")in goal and ("Grub Net") in goal:
-            messagebox.showinfo("Congratulations","You have built your home and prove you are a survivor !!")
+            messagebox.showinfo("Congratulations","You have built your home and proven you are a survivor !!")
             messagebox.showinfo("Congratulations","But is there more to life than just surviving ??")
            
 
-    def end_game1(Self):
+    def end_game1(self):    # The reason why used gob not self was because Self hence why self did not work
 
         
-        if ("the statue of Mog") in inventory and ("the statue of Gog")in inventory and("the statue of Krog") in inventory:
-            messagebox.showinfo("Congratulations","You have retrieve the stolen statues of the Grot Gods !!")
-            messagebox.showinfo("Congratulations","You are rewarded with 500 gold and your reputation has increase.")
-            gob.reputation+=70
-            gob.gold+=500
-            messagebox.showinfo("Congratulations","You can continue to play or quit the game,thank you for playing")
-        gob.__pass_time()
+        if ("the statue of Mog") in inventory and ("the statue of Gog")in inventory and("the statue of Krog") in inventory and gob.end == False:
+            messagebox.showinfo("Congratulations","You have retrieved the stolen statues of the Grot Gods !!")
+            messagebox.showinfo("Congratulations","You are rewarded with 500 gold and your reputation has increased.")
+            self.reputation+=70
+            self.gold+=500
+            messagebox.showinfo("Congratulations","You can continue to play to find the secret ending")
+            messagebox.showinfo("Congratulations","or retire your grot(Quit). Thank you for playing")
+            self.end = True
+            inventory.remove("the statue of Mog")
+            inventory.remove("the statue of Gog")
+            inventory.remove("the statue of Krog")
+            
+            self.__pass_time()
                
 
 
     def rank(self):
+        ending=0
 
-        if self.reputation >10 and self.reputation <20:
+        if self.reputation >5 and self.reputation <10:
+                self.ranking="Grot Simpleton"
+
+        if self.reputation >10 and self.reputation <15:
                 self.ranking="Grot Lackey"  
 
-        if self.reputation >20 and self.reputation  <30:
+        if self.reputation >15 and self.reputation  <20:
                 self.ranking="Grot underling"
 
+        if self.reputation >20 and self.reputation  <30:
+                self.ranking="Average Grot"
+
         if self.reputation >30 and self.reputation  <40:
-                self.ranking="'ard Grot"
+                self.ranking="'Hard as Nails Grot"
 
         if self.reputation >40 and self.reputation  <60:
                 self.ranking="Grot Champion"
@@ -855,8 +1054,24 @@ class Goblin(object):
         if self.reputation >150 and self.reputation  <250:
                 self.ranking="Grot Legendary Hero"
 
-        if self.reputation >250 :
-            self.ranking="Da Grot Boss !! "
+        if self.reputation >250 and self.reputation  <500:
+            self.ranking="The Grot Boss !! "
+
+        if self.reputation >500 and self.reputation  <1000:
+            self.ranking="The Grot Big Boss !! "
+
+        if self.reputation >1000:
+            self.ranking="The Grot KING !! "
+            messagebox.showinfo("Congratulations","Feast after feast, drink after drink. ")
+            messagebox.showinfo("Congratulations","The Grot elders decide to crown you King.")
+            messagebox.showinfo("Congratulations","Long live the king !! Hail the Grot King !!")
+            messagebox.showinfo("Congratulations","You live a life of luxury until your dying day.")
+            messagebox.showinfo("Congratulations","Congrats you found the secret ending.")
+            messagebox.showinfo("Congratulations","  The End ( Game Written by Tommy Kwong )    " )
+            quit()
+            quit()
+            
+            
 
 
         rank= "Grot Ranking: "
@@ -866,7 +1081,38 @@ class Goblin(object):
         lbl_stat_lb4["text"]=rank
 
 
+    def health_warning(self):
+
+        if self.hunger<16:
+            hwarning="Hungry"
+
+            lbl_stat_lb5["text"]=hwarning
+
+        else:
+            hwarning=""
+            
+            lbl_stat_lb5["text"]=hwarning
+
+
+        
+
+
+        if self.health<40:
+            lwarning="Bleeding"
+
+            lbl_stat_lb6["text"]=lwarning
+
+        else:
+            lwarning=""
+            
+            lbl_stat_lb6["text"]=lwarning
+
+
+        
+
+           
     
+      
 
 gob=Goblin("",100,100,0,8,0)
 
@@ -888,6 +1134,12 @@ lbl_stat_lb3.grid(row=10,column=2)
 lbl_stat_lb4=Label(root,text=" Grot Ranking: Grot Cannon Fodder ")
 lbl_stat_lb4.grid(row=11,column=2)
 
+lbl_stat_lb5=Label(root,text="")
+lbl_stat_lb5.grid(row=8,column=0)
+
+lbl_stat_lb6=Label(root,text="")
+lbl_stat_lb6.grid(row=8,column=3)
+
 
 btn_add_task=Button(root,text="    Quit     ",fg="black",bg="white",command=gob.quit)
 btn_add_task.grid(row=1,column=0)
@@ -904,10 +1156,10 @@ btn_add_task=Button(root,text="  Explore  ",fg="black",bg="white",command=gob.se
 btn_add_task.grid(row=4,column=0)
 
 
-btn_add_task=Button(root,text="    Rest     ",fg="black",bg="white",command=gob.rest)
+btn_add_task=Button(root,text="     Rest     ",fg="black",bg="white",command=gob.rest)
 btn_add_task.grid(row=5,column=0)
 
-btn_add_task=Button(root,text="    Pub     ",fg="black",bg="white",command=gob.pub)
+btn_add_task=Button(root,text="     Inn      ",fg="black",bg="white",command=gob.third_win)
 btn_add_task.grid(row=6,column=0)
 
 btn_add_task=Button(root,text="Inventory",fg="black",bg="white",command=gob.inventory)
@@ -934,6 +1186,8 @@ btn_add_task.grid(row=6,column=3)
 btn_add_task=Button(root,text="    Grotonaut   ",fg="black",bg="white",command=gob.grotonaut)
 btn_add_task.grid(row=7,column=3)
 
+
+eatphoto = PhotoImage(file=".\\art\\eat.gif")
 normalphoto = PhotoImage(file=".\\art\\normal.gif")
 huntphoto = PhotoImage(file=".\\art\\hunt.gif")
 restphoto = PhotoImage(file=".\\art\\rest.gif")
@@ -956,10 +1210,10 @@ grotPic.grid(row=8,column=2)
 lb_tasks=Text(root, width =30, height=15, wrap=WORD)
 lb_tasks.grid(row=0,column=2,rowspan=8,columnspan=1,sticky= W) 
 
+
+
+
 gob.message()
-gob.rep()
-
-
 root.mainloop()
 
 
