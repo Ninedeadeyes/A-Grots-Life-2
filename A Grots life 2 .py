@@ -50,10 +50,12 @@ description_list1=("a stupid","a heart broken","a deranged","a morbid","a giant"
 
 rumour=("'You need the power of a tank to face the Womb of Chaos'","'You can fully recover your health by hiring a room which also comes with a nice wormy dinner.'","'Craft items to make life easier for yourself.'","'Need more gold? Craft the Purse Snatcher.'",
         "'You can only find certain crafting material from specific areas,'","A long time ago,a grot became so popular that they were crowned the Grot King.'","'The Shadowland is much more dangerous than The land of Mad Jack'",
-        "'You find yourself doing very silly things in the land of Mad Jack'")
+        "'You find yourself doing very silly things in the land of Mad Jack'","There is a hidden gambling den somewhere in the back of this Inn","Beware of that mysterious trader, he is up to no good")
+
+game=("poker","dice","mahjong","bingo","rummy","roulette")
 
 enemy_list2= ("dragon","demon","blob","zombie","vampire","beholder","troll","chaos giant","ettin","mimic","red jester",
-            "succubus","bone devil","clay golem","drow","gnoll","swamp hag"," night grot","half-ogre","hobgrot","bog imp","owlbear","winter wolf","chaos harlequin","abomination")
+            "succubus","bone devil","clay golem","drow","gnoll","swamp hag","night grot","half-ogre","hobgrot","bog imp","owlbear","winter wolf","chaos harlequin","abomination")
 
 
 
@@ -84,7 +86,8 @@ class Goblin(object):
         self.quest=1
         self.reward=0
         self.item=""
-        self.doomday=15
+        self.doomday=10
+        self.gamble=0
 
 
 
@@ -835,29 +838,121 @@ class Goblin(object):
 
         btn_add_task=Button(window,text=" Mysterious Trader ",fg="black",bg="white",command=gob.trader)
         btn_add_task.grid(row=3,column=0,columnspan=2)
+
+        btn_add_task=Button(window,text=" Gambling Den ",fg="black",bg="white",command=gob.fourth_win)
+        btn_add_task.grid(row=4,column=0,columnspan=2)
+
+    def fourth_win(self):
+        window.destroy()
+        grotPic.config(image = pubphoto)
+        global window1
+        window1=Tk()
+        window1.title("?")
+        window1.geometry("40x80+840+350")
         
 
+        btn_add_task=Button(window1,text="  Place bet 10g         ",fg="black",bg="white",command=gob.ten)
+        btn_add_task.grid(row=1)
+
+        btn_add_task=Button(window1,text="  Place bet 100g       ",fg="black",bg="white",command=gob.hundred)
+        btn_add_task.grid(row=2)
+ 
+        btn_add_task=Button(window1,text="  Place bet 1000g     ",fg="black",bg="white",command=gob.thousand)
+        btn_add_task.grid(row=3)
+
+    def ten(self):
+        window1.destroy()
+        if 10 > self.gold:
+            message="You don't have enough gold"
+
+            lb_tasks.delete(0.0, END)
+            lb_tasks.insert(0.0, message)   
+        else:
+            self.gamble=10
+            self.dice()
+
+            
+
+    def hundred(self):
+        window1.destroy()
+        if 100 > self.gold:
+            message="You don't have enough gold"
+
+            lb_tasks.delete(0.0, END)
+            lb_tasks.insert(0.0, message)   
+        else:
+            self.gamble=100
+            self.dice()
+
+    def thousand(self):
+        window1.destroy()
+        if 1000 > self.gold:
+            message="You don't have enough gold "
+
+            lb_tasks.delete(0.0, END)
+            lb_tasks.insert(0.0, message)   
+            
+        else:
+            self.gamble=1000
+            self.dice()
+            
+
+    def dice(self):
+        game1=random.choice(game)
+        bet=int(self.gamble)
+        bet1=bet*3
+        guess=random.randint(1,3)
+        die1=random.randint(1,4)
+        if die1!=guess:
+            message="you lose in a game of "
+            message+=str(game1)
+            message+=". You lose "
+            message+=str(bet)
+            message+=" gold"
+            
+            self.gold-=bet
+        else:
+            message="You win in a game of "
+            message+=str(game1)
+            message+=". You gain "
+            message+=str(bet1)
+            message+=" gold"
+            self.gold+=bet*3
+
+        lb_tasks.delete(0.0, END)
+        lb_tasks.insert(0.0, message)
+        self.stats()
+         
+            
 
 
     def doom_day(self):
 
-        if self.doomday==10:
+        if self.doomday==8:
             messagebox.showinfo("???","You are making some easy money from this shadowy figure")
             messagebox.showinfo("???","Is there more than meet the eyes ? ")
 
+        if self.doomday==5:
+            messagebox.showinfo("???","The shadowy being grins as he pay your fee")
+            messagebox.showinfo("???","My precious Grot, the old ones thank you")
 
         
-        if self.doomday==5:
+        if self.doomday==3:
             messagebox.showinfo("???","You have a strong feeling in your stomach")
-            messagebox.showinfo("???","if you keep working with this trader he will bring your doom")
-            
+            messagebox.showinfo("???","if you keep working the trader, he will doom us all")
 
+        if self.doomday==1:
+            messagebox.showinfo("???","Your gut tells you not to bring anymore items to this being")
+            messagebox.showinfo("???","It might be his evil smile but you have an inkling")
+            messagebox.showinfo("???","He only needs one more thing to complete his 'work'")
         
         if self.doomday==0:
             messagebox.showinfo("RIP","As you leave the Inn, you hear the mysterious trader chanting")
             messagebox.showinfo("RIP","You turn around but a blinding light consume the room")
             messagebox.showinfo("RIP","You wake up in rubbles with your whole village destroyed")
             messagebox.showinfo("RIP","You watch a green mountain walk into the distance")
+            messagebox.showinfo("Congratulations","Congrats you have found one of the secret endings.")
+            messagebox.showinfo("Congratulations","  The End ( Game Written by Tommy Kwong )    " )
             quit()
             quit()
 
@@ -962,7 +1057,7 @@ class Goblin(object):
             message+=". "
             self.reputation+=12
             self.gold-=100
-            self.hunger=102
+            self.hunger=104
 
         else:
             message="Bog off, someone has a to pay for the food "
@@ -1016,7 +1111,7 @@ class Goblin(object):
             messagebox.showinfo("Congratulations","You are rewarded with 500 gold and your reputation has increased.")
             self.reputation+=70
             self.gold+=500
-            messagebox.showinfo("Congratulations","You can continue to play to find the secret ending")
+            messagebox.showinfo("Congratulations","You can continue to play to find the secret endings")
             messagebox.showinfo("Congratulations","or retire your grot(Quit). Thank you for playing")
             self.end = True
             inventory.remove("the statue of Mog")
@@ -1066,7 +1161,7 @@ class Goblin(object):
             messagebox.showinfo("Congratulations","The Grot elders decide to crown you King.")
             messagebox.showinfo("Congratulations","Long live the king !! Hail the Grot King !!")
             messagebox.showinfo("Congratulations","You live a life of luxury until your dying day.")
-            messagebox.showinfo("Congratulations","Congrats you found the secret ending.")
+            messagebox.showinfo("Congratulations","Congrats you have found one of the secret endings.")
             messagebox.showinfo("Congratulations","  The End ( Game Written by Tommy Kwong )    " )
             quit()
             quit()
