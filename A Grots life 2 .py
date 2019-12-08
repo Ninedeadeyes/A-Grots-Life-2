@@ -35,9 +35,11 @@ loot_list=["a fist full of straws","a fish bone","an old stick","a dirty potato 
 
 loot_list1=["some mechanical bits","a greater demon horn","a beholder eye","some crumbling stones","a giant shoe","a rusty umbrella",]
 
-trader_list=["some mechanical bits","a greater demon horn","a beholder eye","a few pages of the Necronomicon"]
+trader_list=["a greater demon horn","a beholder eye","a few pages of the Necronomicon","fragments of the Old Ones"]
 
 loot_list2=["the statue of Mog","the statue of Gog","the statue of Krog"]
+
+loot_list3=["a few pages of the Necronomicon","fragments of the Old Ones","an ancient bone flute"]
 
 food_taste=["tasty","salty","disgusting","vile","smelly","delicious","foul"]
 
@@ -280,7 +282,7 @@ class Goblin(object):
         global window
         window=Tk()
         window.title("Explore")
-        window.geometry("120x100+840+300")
+        window.geometry("120x80+840+320")
 
         btn_add_task=Button(window,text="  Land of Mad Jack  ",fg="black",bg="white",command=gob.explore)
         btn_add_task.grid(row=1,column=0)
@@ -454,7 +456,7 @@ class Goblin(object):
 
     def explore2(self):
         window.destroy()
-        loot =("a few pages of the Necronomicon")
+        loot =random.choice(loot_list3)
         enemy=random.choice(enemy_list3)
         action=random.choice(action_list2)
         if self.end==False:
@@ -533,7 +535,7 @@ class Goblin(object):
                 message=("You rest better in your Straw Bed.")
                 lb_tasks.delete(0.0, END)
                 
-                sleep=random.randint(20,40)
+                sleep=random.randint(18,30)
                 
 
             else:
@@ -830,10 +832,10 @@ class Goblin(object):
         btn_add_task=Button(window,text="  Round 10g  ",fg="black",bg="white",command=gob.round)
         btn_add_task.grid(row=1,column=1)
  
-        btn_add_task=Button(window,text="  Room 75g ",fg="black",bg="white",command=gob.room)
+        btn_add_task=Button(window,text="  Room 120g ",fg="black",bg="white",command=gob.room)
         btn_add_task.grid(row=2,column=0)
 
-        btn_add_task=Button(window,text="  Feast 100g ",fg="black",bg="white",command=gob.feast)
+        btn_add_task=Button(window,text="  Feast 200g ",fg="black",bg="white",command=gob.feast)
         btn_add_task.grid(row=2,column=1)
 
         btn_add_task=Button(window,text=" Mysterious Trader ",fg="black",bg="white",command=gob.trader)
@@ -851,43 +853,43 @@ class Goblin(object):
         window1.geometry("40x80+840+350")
         
 
-        btn_add_task=Button(window1,text="  Place bet 10g         ",fg="black",bg="white",command=gob.ten)
+        btn_add_task=Button(window1,text="  Place bet 250g       ",fg="black",bg="white",command=gob.low)
         btn_add_task.grid(row=1)
 
-        btn_add_task=Button(window1,text="  Place bet 100g       ",fg="black",bg="white",command=gob.hundred)
+        btn_add_task=Button(window1,text="  Place bet 500g       ",fg="black",bg="white",command=gob.med)
         btn_add_task.grid(row=2)
  
-        btn_add_task=Button(window1,text="  Place bet 1000g     ",fg="black",bg="white",command=gob.thousand)
+        btn_add_task=Button(window1,text="  Place bet 1000g     ",fg="black",bg="white",command=gob.high)
         btn_add_task.grid(row=3)
 
-    def ten(self):
+    def low(self):
         window1.destroy()
-        if 10 > self.gold:
-            message="You don't have enough gold"
+        if 250 > self.gold:
+            message="You do not have enough gold"
 
             lb_tasks.delete(0.0, END)
             lb_tasks.insert(0.0, message)   
         else:
-            self.gamble=10
+            self.gamble=250
             self.dice()
 
             
 
-    def hundred(self):
+    def med(self):
         window1.destroy()
-        if 100 > self.gold:
-            message="You don't have enough gold"
+        if 500 > self.gold:
+            message="You do not have enough gold"
 
             lb_tasks.delete(0.0, END)
             lb_tasks.insert(0.0, message)   
         else:
-            self.gamble=100
+            self.gamble=500
             self.dice()
 
-    def thousand(self):
+    def high(self):
         window1.destroy()
         if 1000 > self.gold:
-            message="You don't have enough gold "
+            message="You do not have enough gold "
 
             lb_tasks.delete(0.0, END)
             lb_tasks.insert(0.0, message)   
@@ -906,7 +908,7 @@ class Goblin(object):
         if die1!=guess:
             message="you lose in a game of "
             message+=str(game1)
-            message+=". You lose "
+            message+=". Your lose "
             message+=str(bet)
             message+=" gold"
             
@@ -939,7 +941,7 @@ class Goblin(object):
         
         if self.doomday==3:
             messagebox.showinfo("???","You have a strong feeling in your stomach")
-            messagebox.showinfo("???","if you keep working the trader, he will doom us all")
+            messagebox.showinfo("???","if you keep working with the trader, he will doom us all")
 
         if self.doomday==1:
             messagebox.showinfo("???","Your gut tells you not to bring anymore items to this being")
@@ -1016,7 +1018,7 @@ class Goblin(object):
             message="You drink by yourself alone, so alone but you do hear a rumour. "
             message+=str(rumour1)
             self.gold-=1
-            self.hunger+=2
+            self.hunger+=4
 
         else:
             message="Bog off, you don't have enough gold"
@@ -1035,9 +1037,9 @@ class Goblin(object):
             message="A round on you !! Your grot mates cheer you on. "
             message+="After retelling some of your misadventures, "
             message+="your grots mate respects you more."
-            self.reputation+=2
+            self.reputation+=1
             self.gold-=10
-            self.hunger+=2
+            self.hunger+=4
 
         else:
             message="Bog off, you are too poor ! "
@@ -1049,14 +1051,14 @@ class Goblin(object):
     def feast(self):
         
         window.destroy()
-        if self.gold>=100:
+        if self.gold>=200:
             message="All food and drinks on your tab !!"
             message+=" Everyone leaves with a fully belly, "
             message+="and greater admiration for you, thank you "
             message+=str(self.name)
             message+=". "
-            self.reputation+=12
-            self.gold-=100
+            self.reputation+=16
+            self.gold-=200
             self.hunger=104
 
         else:
@@ -1070,10 +1072,10 @@ class Goblin(object):
     def room(self):
         
         window.destroy()       
-        if self.gold>=75:
+        if self.gold>=120:
             message="A soft cosy bed and a hot wormy dinner for your belly. "
             message+="What more can a grot ask for ?"
-            self.gold-=100
+            self.gold-=120
             self.hunger=104
             self.health=100
 
