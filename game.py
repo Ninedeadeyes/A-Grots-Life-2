@@ -10,7 +10,7 @@ import time
 
 root=Tk()
 
-root.title("A Grot's life 2")
+root.title("A Grot's life (Advance)")
 
 root.geometry("400x400+900+200")
 
@@ -108,7 +108,7 @@ class Goblin(object):
         
 
     def message(self):
-        answer = simpledialog.askstring("A Grots Life 2", "What is your name, You filthy Grot ?")
+        answer = simpledialog.askstring("A Grots Life", "What is your name, You filthy Grot ?")
         if answer is None:
             answer="Snikrick"
         if answer =="":
