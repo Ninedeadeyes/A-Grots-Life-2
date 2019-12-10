@@ -18,7 +18,7 @@ Key features
 -All graphics created using GraphicsGale
 
 Had to change some of the code before converting to EXE file  (instead of quit() had to use sys.exit) hence why there are two python files
-(A grots life 2 is the original) 
+(A grots life (Advance) is the original) 
 
 
 -To play without python download all files and run the exe file.
