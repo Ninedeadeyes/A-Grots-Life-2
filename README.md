@@ -17,6 +17,8 @@ Key features
 
 -All graphics created using GraphicsGale
 
+This is a Tkinter version of 'A Grots life' in my mini-game series with added crafting items and mechanics/features. 
+
 Had to change some of the code before converting to EXE file  (instead of quit() had to use sys.exit) hence why there are two python files
 (A grots life (Advance) is the original) 
 
