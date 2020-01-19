@@ -8,7 +8,7 @@ import time
 
 root=Tk()
 
-root.title("A Grot's life (Advance)")
+root.title("A Grot's life 2")
 
 root.geometry("400x400+900+200")
 
