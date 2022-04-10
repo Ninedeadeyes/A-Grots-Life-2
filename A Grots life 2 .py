@@ -12,8 +12,6 @@ root.title("A Grot's life 2")
 
 root.geometry("400x400+900+200")
 
-
-
 area_list=(" Woods of the Topsy Turvy King", "Forest of the Humourless Harlequins","Forgotten Graveyard of Ermm..","Castle of the Blackest Knight","Farm of Old McYondor","Bouncy Castle of Borgon",
          "Swamp of the Slimy Hobbits", "Lightest Dungeons", "Ruins of the Fallen Turnip God","Fun House of Eternal Damnation", "Wardrobes of Lady L Moore")
 
@@ -70,9 +68,6 @@ food=("psychedelic mushrooms","meaty bones","rotten apples","spoiled meat","moul
 larder=[]
 goal=[""]
 
- 
-
-
 class Goblin(object):
 
     
@@ -91,8 +86,6 @@ class Goblin(object):
         self.doomday=10
         self.gamble=0
 
-
-
     def __pass_time(self):
         self.hunger -= 4
         self.stats()
@@ -101,9 +94,6 @@ class Goblin(object):
         self.rep()
         self.rank()
         self.health_warning()
-        
-
-        
 
     def message(self):
         answer = simpledialog.askstring("A Grots Life", "What is your name, You filthy Grot ?")
@@ -126,9 +116,7 @@ class Goblin(object):
 
 
         lb_tasks.insert(0.0, message)
-        self.rep()   # can also be gob.rep() really depends if you want it specific for an 'object' 
-
-        
+        self.rep()   # can also be gob.rep() really depends if you want it specific for an 'object'  
 
     def fight_death(self):
     
@@ -153,9 +141,6 @@ class Goblin(object):
         else:
             pass
 
-        
-
-
     def stats(self):
 
         stat="Hunger:"
@@ -168,8 +153,6 @@ class Goblin(object):
         stat+=str(gob.gold)
 
         lbl_stat_lbl["text"]=stat
-
-
 
     def rep(self):
 
@@ -186,8 +169,7 @@ class Goblin(object):
 
 
         if ("Grub Net") in goal :
-            
-            
+                
             grub=random.choice(food)
             self.provision+=4
             larder.append(grub)
@@ -203,9 +185,7 @@ class Goblin(object):
             self.__pass_time()
 
         else: 
-
-            
-        
+  
             grub=random.choice(food)
             self.provision+= stash
             larder.append(grub)
@@ -293,11 +273,6 @@ class Goblin(object):
         btn_add_task=Button(window,text="   Womb of Chaos   ",fg="black",bg="white",command=gob.explore2)
         btn_add_task.grid(row=3,column=0)
 
-        
-
-       
-        
-
     def explore(self):
         window.destroy()
         adventure=random.choice(area_list)
@@ -316,16 +291,13 @@ class Goblin(object):
             lb_tasks.delete(0.0, END)
             damage=random.randint(1,2)
             self.health-=damage
-           
-            
+                       
         else:
             message1=("With a desire for adventure...")
             damage=random.randint(10,30)
             self.health-=damage
             lb_tasks.delete(0.0, END)
-
-        
-         
+      
         message2="You explore the "
         message2+=str(adventure)
         message2+=". You come across "
@@ -341,9 +313,7 @@ class Goblin(object):
 
         if loot in inventory:
             message3= "You see nothing of interest"
-            
-
-            
+               
         else:
             inventory.append(loot)
             message3="You find "
@@ -373,8 +343,6 @@ class Goblin(object):
         self.stats()
         self.__pass_time()
 
-
-
     def explore1(self):
         window.destroy()
         adventure=random.choice(area_list1)
@@ -401,7 +369,6 @@ class Goblin(object):
             self.health-=damage
             lb_tasks.delete(0.0, END)
 
-        
         message2="You explore the "
         message2+=str(adventure)
         message2+=". You come across "
@@ -414,13 +381,9 @@ class Goblin(object):
         message2+=str(damage)
         message2+=" damage. " 
 
-        
-
         if loot in inventory:
             message3= "You see nothing of interest"
-            
-
-            
+                       
         else:
             inventory.append(loot)
             message3="You find "
@@ -443,16 +406,12 @@ class Goblin(object):
             message4+=str(coin)
             message4+=" gold"
             
-
-
         lb_tasks.insert(0.0, message4)
         lb_tasks.insert(0.0, message3)
         lb_tasks.insert(0.0, message2)
         lb_tasks.insert(0.0, message1)
         self.stats()
         self.__pass_time()
-
-
 
     def explore2(self):
         window.destroy()
@@ -462,8 +421,6 @@ class Goblin(object):
         if self.end==False:
             loot=random.choice(loot_list2)
             
-
-        
         if ("Fish Bone Spear") in goal and not ("Grotonaut")in goal:
             message1=(" Armed with your Fish Bone Spear... ")
             lb_tasks.delete(0.0, END)
@@ -481,9 +438,7 @@ class Goblin(object):
             damage=random.randint(200,999)
             self.health-=damage
             lb_tasks.delete(0.0, END)
-
-        
-         
+  
         message2="You explore the "
         message2+=" The Womb of Chaos"
         message2+=". You come across"
@@ -495,7 +450,6 @@ class Goblin(object):
         message2+=str(damage)
         message2+=" damage. "
         
-
         if loot in inventory:
             message3= "You see nothing of interest"
             
@@ -519,7 +473,6 @@ class Goblin(object):
         
         self.__pass_time()
 
-
     def rest(self):
         grotPic.config(image = restphoto)
      
@@ -527,24 +480,20 @@ class Goblin(object):
             message=("You do not need rest")
             lb_tasks.delete(0.0, END)
             
-
         else:
       
-
             if("Straw Bed") in goal:
                 message=("You rest better in your Straw Bed.")
                 lb_tasks.delete(0.0, END)
                 
                 sleep=random.randint(18,30)
                 
-
             else:
                 message=("Sleeping on the rough floor...")
                 lb_tasks.delete(0.0, END)
                
                 sleep=random.randint(5,20)
              
-
             bob=self.health
             self.health+=sleep
 
@@ -561,9 +510,6 @@ class Goblin(object):
         lb_tasks.insert(0.0, message)
         self.__pass_time()
 
-
-
- 
     def craft_spear(self):
         grotPic.config(image = spearphoto)
         if ("Fish Bone Spear") in goal:
@@ -592,15 +538,9 @@ class Goblin(object):
             message+="    ------------------------------"
             message+="Found in the land of Mad Jack"
             
-            
-
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
     
-        
-
-
-
     def straw_bed(self):
         if ("Straw Bed") in goal:
             grotPic.config(image = bedphoto)
@@ -632,10 +572,6 @@ class Goblin(object):
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
         
-        
-
-
-
     def shoe_hut(self):
         
         if ("Shoe Hut") in goal:
@@ -668,8 +604,6 @@ class Goblin(object):
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
         
-
-
     def purse_snatcher(self):
         if ("Purse Snatcher") in goal:
             grotPic.config(image = snatcherphoto)
@@ -699,8 +633,6 @@ class Goblin(object):
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
         
-
-
     def stone_pot(self):
         grotPic.config(image = potphoto)
         if ("Stone Pot") in goal:
@@ -765,9 +697,6 @@ class Goblin(object):
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
         
-
-
-
     def grotonaut(self):
         if ("Grotonaut") in goal:
             grotPic.config(image = robotphoto)
@@ -800,9 +729,6 @@ class Goblin(object):
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
     
-        
-        
-    
     def inventory(self):
         grotPic.config(image = inventphoto)
         message="You have"
@@ -816,8 +742,6 @@ class Goblin(object):
         
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
-
-
 
     def third_win(self):
         grotPic.config(image = pubphoto)
@@ -852,7 +776,6 @@ class Goblin(object):
         window1.title("?")
         window1.geometry("40x80+840+350")
         
-
         btn_add_task=Button(window1,text="  Place bet 250g       ",fg="black",bg="white",command=gob.low)
         btn_add_task.grid(row=1)
 
@@ -872,9 +795,7 @@ class Goblin(object):
         else:
             self.gamble=250
             self.dice()
-
-            
-
+         
     def med(self):
         window1.destroy()
         if 500 > self.gold:
@@ -925,9 +846,6 @@ class Goblin(object):
         lb_tasks.insert(0.0, message)
         self.stats()
          
-            
-
-
     def doom_day(self):
 
         if self.doomday==8:
@@ -961,11 +879,6 @@ class Goblin(object):
         else:
             pass
             
-            
-        
-         
-
-
     def trader(self):
 
         window.destroy()
@@ -982,7 +895,6 @@ class Goblin(object):
             message+=str(self.reward)
             message+=" gold."
 
-
         else:
             if self.item in inventory:
                 message="Well done, "
@@ -996,9 +908,6 @@ class Goblin(object):
                 self.doomday-=1
                 self.doom_day()
         
-
-                    
-
             else:
                 message="Please come back when you have found "
                 message+=str(self.item)
@@ -1008,9 +917,6 @@ class Goblin(object):
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)        
                 
-
-
-
     def drink(self):
         rumour1=random.choice(rumour)
         window.destroy()
@@ -1023,11 +929,9 @@ class Goblin(object):
         else:
             message="Bog off, you don't have enough gold"
 
-         
         self.__pass_time()
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
-
 
     def round(self):
         
@@ -1068,7 +972,6 @@ class Goblin(object):
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
 
-
     def room(self):
         
         window.destroy()       
@@ -1085,21 +988,12 @@ class Goblin(object):
         self.__pass_time()
         lb_tasks.delete(0.0, END)
         lb_tasks.insert(0.0, message)
-
-            
-        
-
-    
-        
-            
-
+   
     def add_task(self):
         pass
 
-
     def end_game(Self):
-
-            
+          
         if ("Fish Bone Spear") in goal and ("Straw Bed")in goal and("Shoe Hut") in goal and ("Stone Pot")in goal and ("Grub Net") in goal:
             messagebox.showinfo("Congratulations","You have built your home and proven you are a survivor !!")
             messagebox.showinfo("Congratulations","But is there more to life than just surviving ??")
@@ -1122,8 +1016,6 @@ class Goblin(object):
             
             self.__pass_time()
                
-
-
     def rank(self):
         ending=0
 
@@ -1168,15 +1060,11 @@ class Goblin(object):
             quit()
             quit()
             
-            
-
-
+           
         rank= "Grot Ranking: "
         rank+= self.ranking
 
-
         lbl_stat_lb4["text"]=rank
-
 
     def health_warning(self):
 
@@ -1190,10 +1078,6 @@ class Goblin(object):
             
             lbl_stat_lb5["text"]=hwarning
 
-
-        
-
-
         if self.health<40:
             lwarning="Bleeding"
 
@@ -1204,16 +1088,7 @@ class Goblin(object):
             
             lbl_stat_lb6["text"]=lwarning
 
-
-        
-
-           
-    
-      
-
 gob=Goblin("",100,100,0,8,0)
-
-
 
 lbl_title=Label(root,text="Options", bg="white")
 lbl_title.grid(row=0,column=0)
@@ -1306,9 +1181,6 @@ grotPic.grid(row=8,column=2)
 
 lb_tasks=Text(root, width =30, height=15, wrap=WORD)
 lb_tasks.grid(row=0,column=2,rowspan=8,columnspan=1,sticky= W) 
-
-
-
 
 gob.message()
 root.mainloop()
