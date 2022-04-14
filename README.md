@@ -17,6 +17,8 @@ Key features
 
 -All graphics created using GraphicsGale
 
+Music created in Beepbox 
+
 This is a Tkinter version of 'A Grots Life' in my mini-game series with added crafting items and many new mechanics/features. 
 
 Had to change some of the code before converting to EXE file  (instead of quit() had to use sys.exit) hence why there are two python files
