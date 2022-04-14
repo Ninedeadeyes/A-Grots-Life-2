@@ -4,6 +4,8 @@ from tkinter import messagebox, simpledialog
 
 import random
 
+import winsound
+
 import sys
 
 import time 
@@ -12,7 +14,7 @@ root=Tk()
 
 root.title("A Grot's life 2")
 
-root.geometry("400x400+900+200")
+root.geometry("400x420+1125+300")
 
 
 
@@ -92,6 +94,7 @@ class Goblin(object):
         self.item=""
         self.doomday=10
         self.gamble=0
+        self.music=0
 
 
 
@@ -284,7 +287,7 @@ class Goblin(object):
         global window
         window=Tk()
         window.title("Explore")
-        window.geometry("120x80+840+320")
+        window.geometry("120x85+1070+420")
 
         btn_add_task=Button(window,text="  Land of Mad Jack  ",fg="black",bg="white",command=gob.explore)
         btn_add_task.grid(row=1,column=0)
@@ -825,7 +828,7 @@ class Goblin(object):
         global window
         window=Tk()
         window.title("Inn")
-        window.geometry("150x80+840+350")
+        window.geometry("150x80+1070+430")
 
         btn_add_task=Button(window,text="  Drink 1g    ",fg="black",bg="white",command=gob.drink)
         btn_add_task.grid(row=1,column=0)
@@ -851,7 +854,7 @@ class Goblin(object):
         global window1
         window1=Tk()
         window1.title("?")
-        window1.geometry("40x80+840+350")
+        window1.geometry("40x80+1070+430")
         
 
         btn_add_task=Button(window1,text="  Place bet 250g       ",fg="black",bg="white",command=gob.low)
@@ -1203,13 +1206,14 @@ class Goblin(object):
             
             lbl_stat_lb6["text"]=lwarning
 
-
-        
-
-           
-    
-      
-
+    def music_1(self):
+        if gob.music==0:
+            winsound.PlaySound(None,  winsound.SND_ALIAS)
+            gob.music=1
+        else:
+            winsound.PlaySound(".\\music\\background.wav",  winsound.SND_ALIAS | winsound.SND_ASYNC +winsound.SND_LOOP)
+            gob.music=0
+            
 gob=Goblin("",100,100,0,8,0)
 
 
@@ -1281,6 +1285,9 @@ btn_add_task.grid(row=6,column=3)
 btn_add_task=Button(root,text="    Grotonaut   ",fg="black",bg="white",command=gob.grotonaut)
 btn_add_task.grid(row=7,column=3)
 
+btn_add_task=Button(root,text="    Music On/Off   ",fg="black",bg="white",command=gob.music_1)
+btn_add_task.grid(row=12,column=2)
+
 
 eatphoto = PhotoImage(file=".\\art\\eat.gif")
 normalphoto = PhotoImage(file=".\\art\\normal.gif")
@@ -1305,10 +1312,8 @@ grotPic.grid(row=8,column=2)
 lb_tasks=Text(root, width =30, height=15, wrap=WORD)
 lb_tasks.grid(row=0,column=2,rowspan=8,columnspan=1,sticky= W) 
 
-
-
-
 gob.message()
+winsound.PlaySound(".\\music\\background.wav",  winsound.SND_ALIAS | winsound.SND_ASYNC +winsound.SND_LOOP) 
 root.mainloop()
 
 
