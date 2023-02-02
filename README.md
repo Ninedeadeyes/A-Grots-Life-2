@@ -27,4 +27,8 @@ Video
 
 https://www.youtube.com/watch?v=4k8gHtYm528
 
+Check out my other Python Games at 
+
+https://ninedeadeyes.github.io/Python-Game-Gallery/
+
 
